@@ -1,8 +1,10 @@
-A simple content sharing site with user posts and threaded comments
+For english version of this project, go [here](https://github.com/dxwc/CRUD-JSFree)
 
-# Features
+লেখা, মতামত এবং পাল্টা মতামত বিত্রির ওয়েবসাইট।
 
-+ No frontend JavaScript, No third party
+# বৈশিষ্ট্যর ভেতরে আছে আছে:
+
++ সামনে কোনো জাভাস্ক্রিপ্ট নেই। কোনো তৃতীয় পক্ষ নেই।
 + Submit post
     + Markdown formatted styling (excluding html, link nd image embeds)
     + Edit post
