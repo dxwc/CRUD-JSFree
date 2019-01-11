@@ -12,22 +12,23 @@
     <nav>
         <a
             style='text-decoration: none; border: none'
+            title='একশ টাকা কেজি'
             href='/'>
             <img src='/fish_smaller_t.png'>
         </a>
 <? if(!locals.name){ ?>
     <span class='right'>
         <form method='GET' action='/sign_in'>
-            <button type='submit'>Sign In</button>
+            <button type='submit'>নিবন্ধনধারী প্রবেশ</button>
         </form>
         <form method='GET' action='/sign_up'>
-            <button type='submit'>Sign Up</button>
+            <button type='submit'>নিবন্ধন</button>
         </form>
     </span>
 <? } else { ?>
     <span class='right'>
         <form method='GET' action='/post'>
-            <button type='submit'>✍️Post</button>
+            <button type='submit'>✍️লিখূন</button>
         </form>
         <form method='GET' action='/user/<?= name ?>'>
             <button type='submit'><?= name ?></button>
@@ -35,7 +36,7 @@
         <form method='GET' action='/sign_out'>
             <button
                 class='warn'
-                type='submit'>Sign Out</button>
+                type='submit'>সাময়িক বাহির</button>
         </form>
     </span>
 <? } ?>
