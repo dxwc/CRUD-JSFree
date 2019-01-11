@@ -2,25 +2,24 @@
 <? if(locals.name === false) { ?>
 <form class='main_form' method='POST' action='/sign_in'>
     <div>
-        <label for='user_name'>Enter your user name:</label>
         <input
             name='user_name'
+            placeholder='নিবন্ধিত নাম লিখুন'
+            title='নিবন্ধিত নাম লিখুন। আপনি যদি নিবন্ধন না করে থাকেন, উপরে ডানে "নিবন্ধন" লিংক এ চাপ দিয়ে নিবন্ধন করে নিতে পারেন।'
             type='text'
-            placeholder='user name'
             minlength='1'
             maxlength='30'
-            autocomplete='off'
             <? if(locals.user_name){ ?>
             value='<?= user_name ?>'
             <? } ?>
             required>
     </div>
     <div>
-        <label for='password'>Enter your password:</label>
         <input
             name='password'
+            title='নিবন্ধিত গুপ্ত অক্ষরগুলি লিখুন।'
+            placeholder='নিবন্ধিত গুপ্ত অক্ষরগুলি লিখুন'
             type='password'
-            placeholder='password'
             minlength='1'
             autocomplete='off'
             <? if(locals.password) { ?>
@@ -29,28 +28,31 @@
             required>
     </div>
     <div>
-        <label for='captcha'>Solve captcha</label>
-        <?- svg ?>
+        <label
+            title='স্বয়ংক্রিয় কিছু কম্পিউটার সবসময় ওয়েবসাইট ভাঙার চেষ্টা করে এবং সেগুলো আঁকানো লেখা পড়তে পারে না। সে কারণে, আপনি যে মানুষ, সেটা প্রমানের জন্য আপনাকে এটা করতে হচ্ছে।'
+            for='captcha'>এই চারটি অক্ষর লিখুন:</label>
+        <span title='নিচে এই চারটি অক্ষর লিখুন'><?- svg ?></span>
         <input
             name='captcha'
+            placeholder='আঁকানো অক্ষরগুলি লিখুন'
+            title='স্বয়ংক্রিয় কিছু কম্পিউটার সবসময় ওয়েবসাইট ভাঙার চেষ্টা করে এবং সেগুলো আঁকানো লেখা পড়তে পারে না। সে কারণে, আপনি যে মানুষ, সেটা প্রমানের জন্য আপনাকে এটা করতে হচ্ছে।'
             type='text'
-            placeholder='captcha'
             minlength='4'
             maxlength='4'
             autocomplete='off'
             required>
     </div>
     <? if(locals.info) { ?>
-    <h6 class='meta_info'>
+    <h6 class='meta_info warn_text'>
         <?= info ?>
     </h6>
     <? } ?>
     <div>
         <button
-            type='submit'>Submit »</button>
+            type='submit'>ভেতরে ঢুকুন »</button>
     </div>
 </form>
 <? } else { ?>
-    You are already signed in. No need to do it again.
+    আপনি আগেই নিবন্ধনযুক্তভাবে ভেতরে ঢুকেছেন।  এই পাতায় আপনার এখন আর কিছু করার প্রয়োজন নেই।
 <? } ?>
 <?- include('./common/layout_post.ejs') ?>

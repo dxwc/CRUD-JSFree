@@ -27,7 +27,7 @@ router.post('/sign_in', (req, res) =>
     // Check captcha
     if(!captcha.captcha_is_valid(req))
     {
-        req.body.info = `Captcha invalid, retry`;
+        req.body.info = `অক্ষরগুলি ঠিক হয়নি, আবার চেষ্টা করুন`;
         return render(req, res, 'sign_in', req.body, true, 409);
     }
 
@@ -44,15 +44,18 @@ router.post('/sign_in', (req, res) =>
             if(err)
             {
                 console.log(err);
-                req.body.info = `Unexpected error, you may retry or contact admin`;
+                req.body.info =
+                `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+                `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+                `পরিচালকদের জানাতে পারেন।`;
                 return render(req, res, 'sign_in', req.body, true, 500);
 
             }
             if(!user) /* User not found */
             {
                 req.body.info =
-                `No such user and password combination found. ` +
-                `Double check or re-enter your inputs and then retry`;
+                `ওই নাম ও গুপ্ত অক্ষর মিলিত কোনো নিবন্ধন পাওয়া যায়নি। ` +
+                `নাম ও গুপ্ত অক্ষর ঠিক করে আবার চেষ্টা করতে পারেন।`
                 return render(req, res, 'sign_in', req.body, true, 409);
             }
             else
@@ -64,7 +67,9 @@ router.post('/sign_in', (req, res) =>
                         console.error(err);
 
                         req.body.info =
-                            `Unexpected error, you may retry or contact admin`;
+                        `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+                        `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+                        `পরিচালকদের জানাতে পারেন।`;
                         return render(req, res, 'sign_in', req.body, true, 500);
                     }
                     else
