@@ -11,7 +11,7 @@ router.post('/post', async (req, res) =>
 {
     if(!req.isAuthenticated())
     {
-        req.body.info = `You must be signed in to post`;
+        req.body.info = `লিখতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'create_post', req.body);
     }
 
@@ -37,13 +37,14 @@ router.post('/post', async (req, res) =>
     {
         if(err.code === 'TIME_LIMIT')
         {
-            req.body.info = `You must wait before making a new post. Wait ` +
-                            `${err.message} more seconds and retry`;
+            req.body.info = `নতুন লেখা জমা দিতে আরো ` +
+                            `${err.message} সেকেন্ড অপেক্ষা করতে হবে`;
             return render(req, res, 'create_post', req.body, false, 429)
         }
 
         console.log(req.session.passport, err);
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `কোথাও সমস্যা হয়েছে, আবার চেষ্টা করতে পারেন অথবা পরিচালকদের সাথে যোগাযোগ `
+        + `করতে পারেন`;
         return render(req, res, 'create_post', req.body, false, 500);
     }
 });

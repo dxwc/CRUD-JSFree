@@ -3,14 +3,14 @@
 <? if(locals.name !== false) { ?>
 <form method='POST' action='/post/'>
     <div>
-        <label for='content'>Write your content here:</label>
+        <label for='content'>আপনার লেখা এখানে লিখুন:</label>
     </div>
     <div>
         <textarea
             style='height: 30vw'
             name='content'
             type='text'
-            placeholder='Enter your content here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><? if(locals.content){ ?><?= content ?><? } ?></textarea>
@@ -21,11 +21,44 @@
     </div>
     <? } ?>
     <div>
-        <button class='submit' type='submit'>Publish</button>
+        <button class='submit' type='submit'>প্রকাশ করুন</button>
     </div>
 </form>
+
+<br>
+
+<ul>
+<h6>
+    লেখার কিছু পদ্ধতি:
+</h6>
+</ul>
+
+<li>
+    লাইনের প্রথমে একটি # এবং একটি ফাঁকা দিয়ে শুরু করলে প্রথম  সুরোনাম হবে।
+</li>
+<li>
+    লাইনের প্রথমে দুটি # এবং একটি ফাঁকা দিয়ে শুরু করলে দ্বিতীয় সুরোনাম হবে, ইত্যাদি।
+</li>
+
+<li>
+    কোনো ওয়েবসাইট লিংক কপি পেস্ট করে দিলেই লিংক হয়ে যাবে।
+</li>
+<li>
+    ওয়েবসাইট লিংকের নাম পরিবর্তন করতে এমন করে লিখতে পারেন :
+    [যে নাম দিতে চান](কপি পেস্ট করা ওয়েবসাইটের লিংক)
+
+</li>
+
+<li>
+    কোনো কিছু গাড়ো করে লিখতে দুই পাশে দুটি * পাশাপাশি লিখুন।
+</li>
+<li>
+    কোনো লেখা বাঁকা করে লিখতে দুই পাশে একটি * পাশাপাশি লিখুন।
+</li>
+
+
 <? } else { ?>
-    You must be signed in to post
+    লেখা প্রকাশ করতে আপনার নিবন্ধন থাকা লাগবে এবং নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে
 <? } ?>
 
 <?- include('./common/layout_post.ejs') ?>

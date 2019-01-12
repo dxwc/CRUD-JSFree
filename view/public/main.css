@@ -252,3 +252,8 @@ h6 { font-size: 1.2em; }
 {
     color: red;
 }
+
+.read h1, .read h1 a
+{
+    font-size: 2.5rem;
+}

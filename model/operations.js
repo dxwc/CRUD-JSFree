@@ -8,7 +8,7 @@ let md       = require('markdown-it')({ breaks: true, linkify : true });
 let img      = require('../controller/function/img.js');
 let num_date = require('../controller/function/num_date.js');
 
-md.disable('link');
+// md.disable('link');
 md.disable('image');
 md.disable('normalize');
 md.enable('newline');
