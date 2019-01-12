@@ -1,4 +1,4 @@
-<?- include('./common/layout_pre.ejs', { title : 'Update', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'পরিবর্তন', name : locals.name }) ?>
 
 <? if
 (
@@ -11,14 +11,14 @@
 ) { ?>
 <form method='POST' action='/post/<?= id ?>/update'>
     <div>
-        <label for='content'>Edit your content here:</label>
+        <label for='content'>এখানে আপনার লেখা পরিবর্তন করুন:</label>
     </div>
     <div>
         <textarea
             style='height: 30vw'
             name='content'
             type='text'
-            placeholder='Enter your content here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><?= content ?></textarea>
@@ -29,19 +29,44 @@
     </div>
     <? } ?>
     <div>
-        <button class='submit' type='submit'>Publish change</button>
+        <button class='submit' type='submit'>পরিবর্তন প্রকাশ করুন</button>
     </div>
 </form>
 <br>
 <form method='GET' action='/post/<?= id ?>/delete'>
     <input type='hidden' name='username' value='<?= by ?>'>
-    <button class='submit' type='submit'>Delete</button>
+    <button class='submit' type='submit'>মুছে ফেলা</button>
 </form>
 <form method='GET' action='/post/<?= id ?>'>
-    <button class='submit' type='submit'>Go back to post</button>
+    <button class='submit' type='submit'>লেখাতে ফিরে যান</button>
 </form>
+<ul>
+    <h6>
+        লেখার কিছু পদ্ধতি:
+    </h6>
+    <li>
+        লাইনের প্রথমে একটি # এবং একটি ফাঁকা দিয়ে শুরু করলে প্রথম  সুরোনাম হবে।
+    </li>
+    <li>
+        লাইনের প্রথমে দুটি # এবং একটি ফাঁকা দিয়ে শুরু করলে দ্বিতীয় সুরোনাম হবে, ইত্যাদি।
+    </li>
+
+    <li>
+        কোনো ওয়েবসাইট লিংক কপি পেস্ট করে দিলেই লিংক হয়ে যাবে।
+    </li>
+    <li>
+        ওয়েবসাইট লিংকের নাম পরিবর্তন করতে এমন করে লিখতে পারেন :
+        [যে নাম দিতে চান](কপি পেস্ট করা ওয়েবসাইটের লিংক)
+    </li>
+    <li>
+        কোনো কিছু গাড়ো করে লিখতে দুই পাশে দুটি * পাশাপাশি লিখুন।
+    </li>
+    <li>
+        কোনো লেখা বাঁকা করে লিখতে দুই পাশে একটি * পাশাপাশি লিখুন।
+    </li>
+</ul>
 <? } else { ?>
-    You must be signed in and author of the post to edit it
+    লেখা পরিবর্তন করতে আপনার নিবন্ধন থাকা লাগবে এবং নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে
 <? } ?>
 
 <?- include('./common/layout_post.ejs') ?>

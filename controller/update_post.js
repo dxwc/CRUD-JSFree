@@ -12,7 +12,9 @@ router.get('/post/:id/update', async (req, res) =>
             req,
             res,
             'update_post',
-            { info : `You must be signed in and author of the post to edit it`},
+            {
+                info : `লেখা পরিবর্তন করতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে ` +
+                       `এবং এই লেখার লেখক হতে হবে।`},
             status ? status : 400
         );
     }
@@ -45,7 +47,8 @@ router.post('/post/:id/update', async (req, res) =>
 {
     function invalid(status)
     {
-        req.body.info = `You must be signed in and author of the post to edit it`;
+        req.body.info =
+        `লেখা পরিবর্তন করতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে এবং এই লেখার লেখক হতে হবে।`;
         return render(req, res, 'update_post', req.body, status ? status : 400);
     }
 
@@ -70,7 +73,9 @@ router.post('/post/:id/update', async (req, res) =>
     }
     catch(err)
     {
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+        `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+        `পরিচালকদের জানাতে পারেন।`;
         return render(req, res, 'update_post', req.body, false, 500);
     }
 });
