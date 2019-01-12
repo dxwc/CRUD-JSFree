@@ -1,4 +1,4 @@
-<?- include('./common/layout_pre.ejs', { title : 'Delete', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'মুছে ফেলা', name : locals.name }) ?>
 <span class='content'>
 <? if
 (
@@ -16,24 +16,24 @@
     <div>
         <button
             class='submit warn'
-            type='submit'>Confirm you want to delete below post</button>
+            type='submit'>মুছে ফেলতে চান সেটা নিশ্চিত করুন</button>
     </div>
 </form>
 <p><?- content ?></p>
 <div class='meta_info'>
-    <p>Posted by <a href='/user/<?= by ?>'><?= by ?></a></p>
-    <p>Published <?= createdAt ?></p>
-    <p>Updated <?= updatedAt ?></p>
+    <p>লিখেছে <a href='/user/<?= by ?>'><?= by ?></a></p>
+    <p>প্রকাশ হয় <?= createdAt ?></p>
+    <p>শেষ পরিবর্তন হয় <?= updatedAt ?></p>
 </div>
 <form method='GET' action='/post/<?= id ?>/update'>
     <input type='hidden' name='username' value='<?= by ?>'>
-    <button class='submit' type='submit'>Edit</button>
+    <button class='submit' type='submit'>পরিবর্তন</button>
 </form>
 <form method='GET' action='/post/<?= id ?>'>
-    <button class='submit' type='submit'>Go back to post</button>
+    <button class='submit' type='submit'>লেখাতে ফিরে যান</button>
 </form>
 <? } else { ?>
-    You must be signed in and author of the post to delete it
+    লেখা মুছে ফেলতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে এবং লেখার লেখক হতে হবে
 <? } ?>
 </span>
 
