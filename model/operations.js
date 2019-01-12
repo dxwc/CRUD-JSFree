@@ -6,6 +6,7 @@ let querystr = require('querystring');
 let moment   = require('moment');
 let md       = require('markdown-it')({ breaks: true, linkify : true });
 let img      = require('../controller/function/img.js');
+let num_date = require('../controller/function/num_date.js');
 
 md.disable('link');
 md.disable('image');
@@ -478,7 +479,6 @@ function front_page(show_new, remove_time_limit, offset)
     {
         arr.forEach((res) =>
         {
-            res.createdAt = moment(res.createdAt).fromNow();
             if(res.content.length === 300)
             {
                 res.content = ready(res.content + ' ...');
@@ -488,6 +488,9 @@ function front_page(show_new, remove_time_limit, offset)
                 res.content = ready(res.content);
             }
             res.by = ready(res.by);
+            res.createdAt = num_date(moment(res.createdAt).fromNow());
+            res.replies = num_date(res.replies);
+            res.real_replies = num_date(res.real_replies);
         });
 
         return arr;
