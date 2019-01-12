@@ -21,7 +21,8 @@ router.post('/sign_in', (req, res) =>
         !req.body.hasOwnProperty('password')
     )
     {
-        return res.status(401).send();
+        req.body.info = `সবকিছু পূরণ করে আবার চেষ্টা করুন`;
+        return render(req, res, 'sign_in', req.body, true, 400);
     }
 
     // Check captcha

@@ -30,11 +30,8 @@ router.post('/sign_up', (req, res) =>
     // If invalid input:
     if(!recieved.hasOwnProperty('user_name') || !recieved.hasOwnProperty('password'))
     {
-        return res.status(401).send();
-        /*
-        recieved.info = `Invalid input`;
+        recieved.info = `সবকিছু পূরণ করে আবার চেষ্টা করুন`;
         return render(req, res, 'sign_up', recieved, true, 401);
-        */
     }
 
     // Check captcha
