@@ -37,7 +37,7 @@ router.post('/sign_up', (req, res) =>
     // Check captcha
     if(!captcha.captcha_is_valid(req))
     {
-        recieved.info = `Captcha invalid, retry`;
+        recieved.info = `অক্ষরগুলি ঠিক হয়নি, আবার চেষ্টা করুন`;
         return render(req, res, 'sign_up', recieved, true, 409);
     }
 
@@ -75,7 +75,10 @@ router.post('/sign_up', (req, res) =>
                         req,
                         res,
                         'error',
-                        { info : 'Sign in to get started' },
+                        {
+                            info : `নিবন্ধন করা হয়েছে কিন্তু নিবন্ধন প্রবেশের কোনো সমস্যা হয়েছে। ` +
+                                   `প্রবেশ লিংক এ যেয়ে নিজে ঢোকার চেষ্টা করতে পারেন`
+                        },
                         true
                     );
                 }
@@ -92,7 +95,11 @@ router.post('/sign_up', (req, res) =>
                                 req,
                                 res,
                                 'error',
-                                { info : 'Sign in to get started' },
+                                {
+                                    info :
+                                    `নিবন্ধন করা হয়েছে কিন্তু নিবন্ধন প্রবেশের কোনো সমস্যা হয়েছে। ` +
+                                    `প্রবেশ লিংক এ যেয়ে নিজে ঢোকার চেষ্টা করতে পারেন`
+                                },
                                 true
                             );
                         }
@@ -115,12 +122,16 @@ router.post('/sign_up', (req, res) =>
     {
         if(err.code === 'USER_EXISTS')
         {
-            recieved.info = `Sorry, that username is taken, change and retry`;
+            recieved.info = `ওই নামে অন্য একজনের নিবন্ধন তৈরী আছে। ` +
+            `অনুগ্রহ করে নাম বদলিয়ে আবার চেষ্টা করুন`;
             return render(req, res, 'sign_up', recieved, true);
         }
         else
         {
-            recieved.info = `Unexpected error. Retry or contact admin`;
+            recieved.info =
+            `দুঃখিত, কোথাও কোনো গরমিল হয়েছে। ` +
+            `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+            `পরিচালকদের জানাতে পারেন`;
             return render(req, res, 'sign_up', recieved, true, 500);
         }
     });

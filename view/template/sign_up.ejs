@@ -1,12 +1,12 @@
-<?- include('./common/layout_pre.ejs', { title : 'Sign Up', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'নিবন্ধন', name : locals.name }) ?>
 <? if(locals.name === false) { ?>
 <form class='main_form' method='POST' action='/sign_up'>
     <div>
-        <label for='user_name'>Choose a user name:</label>
         <input
             name='user_name'
+            placeholder='নাম বা কিছু অক্ষর লিখুন'
+            title='সত্য নাম ব্যবহার থেকে বিরত থাকুন।'
             type='text'
-            placeholder='user name'
             minlength='1'
             maxlength='30'
             autocomplete='off'
@@ -16,11 +16,11 @@
             required>
     </div>
     <div>
-        <label for='password'>Choose a password:</label>
         <input
             name='password'
+            title='যত বেশি অক্ষর, কারো পক্ষে আপনার নিবন্ধন চুরি করে নেওয়া ততো কঠিন।'
+            placeholder='কিছু গুপ্ত অক্ষর লিখুন'
             type='password'
-            placeholder='password'
             minlength='1'
             autocomplete='off'
             <? if(locals.password) { ?>
@@ -29,28 +29,41 @@
             required>
     </div>
     <div>
-        <label for='captcha'>Solve captcha</label>
-        <?- svg ?>
+        <label
+            title='স্বয়ংক্রিয় কিছু কম্পিউটার সবসময় ওয়েবসাইট ভাঙার চেষ্টা করে এবং সেগুলো আঁকানো লেখা পড়তে পারে না। সে কারণে, আপনি যে মানুষ, সেটা প্রমানের জন্য আপনাকে এটা করতে হচ্ছে।'
+            for='captcha'>এই চারটি অক্ষর লিখুন:</label>
+        <span title='নিচে এই চারটি অক্ষর লিখুন'><?- svg ?></span>
         <input
             name='captcha'
+            placeholder='আঁকানো অক্ষরগুলি লিখুন'
+            title='স্বয়ংক্রিয় কিছু কম্পিউটার সবসময় ওয়েবসাইট ভাঙার চেষ্টা করে এবং সেগুলো আঁকানো লেখা পড়তে পারে না। সে কারণে, আপনি যে মানুষ, সেটা প্রমানের জন্য আপনাকে এটা করতে হচ্ছে।'
             type='text'
-            placeholder='captcha'
             minlength='4'
             maxlength='4'
             autocomplete='off'
             required>
     </div>
     <? if(locals.info) { ?>
-    <div class='meta_info'>
+    <div class='meta_info warn_text'>
         <?= info ?>
     </div>
     <? } ?>
     <div>
         <button
-            type='submit'>Submit »</button>
+            type='submit'>জমা দিন »</button>
     </div>
 </form>
+<br>
+<p class='meta_info' align='center'>
+    নিবন্ধন করলে আপনি আমাদের ওয়েবসাইটে লিখতে পারবেন।
+</p>
+<p class='meta_info' align='center'>
+    আপনার পছন্দের নাম এবং গুপ্ত অক্ষরগুলি মনে রাখবেন কারণ ভবিষ্যতে
+    এগুলো নিবন্ধনধারী হিসেবে প্রবেশের জন্য দরকার হবে।
+</p>
 <? } else { ?>
-    You are already signed up. No need to do it again.
+<p align='center' >
+    আপনি আগেই নিবন্ধনযুক্তভাবে ভেতরে ঢুকেছেন। এই পাতায় আপনার এখন আর কিছু করার প্রয়োজন নেই।
+</p>
 <? } ?>
 <?- include('./common/layout_post.ejs') ?>
