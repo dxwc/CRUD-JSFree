@@ -1,6 +1,7 @@
 let router = require('express').Router();
 let render = require('./function/render.js');
 let op     = require('../model/operations.js');
+let nd     = require('../controller/function/num_date.js');
 
 router.get('/', async (req, res) =>
 {
@@ -27,12 +28,31 @@ router.get('/', async (req, res) =>
                 (true, true, req.query.page * 100);
 
                 return render
-                (req, res, 'home', { posts :temp, page : req.query.page + 1 });
+                (
+                    req,
+                    res,
+                    'home',
+                    {
+                        posts : temp,
+                        page  : req.query.page + 1,
+                        ptext : nd(String(req.query.page + 1))
+                    }
+                );
             }
             else
             {
                 temp = await op.front_page(true, true);
-                return render(req, res, 'home', { posts :temp, page : 1 });
+                return render
+                (
+                    req,
+                    res,
+                    'home',
+                    {
+                        posts : temp,
+                        page  : 1,
+                        ptext : nd(String(req.query.page + 1))
+                    }
+                );
             }
         }
         else if

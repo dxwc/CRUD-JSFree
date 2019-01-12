@@ -28,12 +28,12 @@
 <h6>আর কোনো লেখার লিংক এখানে নেই</h6>
 <? } ?>
 
-<? if(locals.page && typeof(page) === 'number') { ?>
+<? if(locals.page && typeof(page) === 'number' && locals.ptext) { ?>
     <span class='meta_info'>
         <? if(page > 1) { ?>
             <a href='/?new=true&page=<?= page - 1 ?>'>« পেছনের পাতা</a>
         <? } ?>
-        <?= locals.page ?>
+        <?= locals.ptext ?>
         <? if(locals.posts && locals.posts.length) { ?>
             <a href='/?new=true&page=<?= page + 1 ?>'>পরের পাতা »</a>
         <? } ?>
