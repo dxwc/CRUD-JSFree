@@ -2,7 +2,7 @@ For english version of this project, go [here](https://github.com/dxwc/CRUD-JSFr
 
 লেখা, মতামত এবং পাল্টা মতামত বিত্রির ওয়েবসাইট।
 
-# বৈশিষ্ট্যর ভেতরে আছে আছে:
+# বৈশিষ্ট্যর ভেতরে আছে:
 
 + সামনে কোনো জাভাস্ক্রিপ্ট নেই। কোনো তৃতীয় পক্ষ নেই।
 + Submit post
