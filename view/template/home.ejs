@@ -1,15 +1,15 @@
-<?- include('./common/layout_pre.ejs', { title : 'Home', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'প্রথম পাতা', name : locals.name }) ?>
 <span class='content'>
 <? if(locals.posts && posts.constructor === Array && posts.length) { ?>
 <? if(locals.page && typeof(page) === 'number') { ?>
-    <h3>Newer posts are on top</h3>
+    <h3>নতুন লেখাগুলো উপরের দিকে</h3>
 <? } ?>
 <? posts.forEach((p) => { ?>
 <div class='post'>
     <p>
         <span class='count'>
             <a href='/post/<?= p.id ?>'>
-            <?= p.replies ?><sub>comments</sub>
+            <?= p.replies ?><sub>টা মতামত</sub>
             </a>
         </span>
         <a href='/post/<?= p.id ?>'>
@@ -17,25 +17,25 @@
         </a>
     </p>
     <span class='meta_info'>
-        posted by <a href='/user/<?= p.by ?>'><?= p.by ?></a>
+        লিখেছে <a href='/user/<?= p.by ?>'><?= p.by ?></a>
         <?= p.createdAt ?>
     </span>
-    <a class='readmore' href='/post/<?= p.id ?>'>read »</a>
+    <a class='readmore' href='/post/<?= p.id ?>'>পড়ুন »</a>
 </div>
 
 <? }); ?>
 <? } else { ?>
-<h6>No more posts to show</h6>
+<h6>আর কোনো লেখার লিংক এখানে নেই</h6>
 <? } ?>
 
 <? if(locals.page && typeof(page) === 'number') { ?>
     <span class='meta_info'>
         <? if(page > 1) { ?>
-            <a href='/?new=true&page=<?= page - 1 ?>'>« previous</a>
+            <a href='/?new=true&page=<?= page - 1 ?>'>« পেছনের পাতা</a>
         <? } ?>
-        page <?= locals.page ?>
+        <?= locals.page ?>
         <? if(locals.posts && locals.posts.length) { ?>
-            <a href='/?new=true&page=<?= page + 1 ?>'>next »</a>
+            <a href='/?new=true&page=<?= page + 1 ?>'>পরের পাতা »</a>
         <? } ?>
     </span>
 <? } ?>
