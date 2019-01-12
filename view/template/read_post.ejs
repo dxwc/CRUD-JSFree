@@ -13,8 +13,8 @@
 <p><?- post.content ?></p>
 </span>
 <span class='meta_info'>
-    Posted by <a href='/user/<?= post.by ?>'><?= post.by ?></a>
-    <span title='Updated <?= post.updatedAt ?>'><?= post.createdAt ?></span>
+    লিখেছে <a href='/user/<?= post.by ?>'><?= post.by ?></a>
+    <span title='শেষ বদল হয় <?= post.updatedAt ?>'><?= post.createdAt ?></span>
 </span>
 <? if
 (
@@ -23,11 +23,11 @@
 ) { ?>
 <form class='inline' method='GET' action='/post/<?= post.id ?>/update'>
     <input type='hidden' name='username' value='<?= post.by ?>'>
-    <button class='post_button' type='submit'>edit</button>
+    <button class='post_button' type='submit'>পরিবর্তন</button>
 </form>
 <form class='inline' method='GET' action='/post/<?= post.id ?>/delete'>
     <input type='hidden' name='username' value='<?= post.by ?>'>
-    <button class='post_button' type='submit'>delete</button>
+    <button class='post_button' type='submit'>মুছে ফেলা</button>
 </form>
 <? } ?>
 <? if(locals.name !== false) { ?>
@@ -35,7 +35,7 @@
     class='inline'
     method='GET'
     action='/contact/<?= locals.post.self_link ? post.self_link : "" ?>'>
-    <button class='post_button' type='submit'>report</button>
+    <button class='post_button' type='submit'>সমস্যা</button>
 </form>
 <? } ?>
 <? if(locals.name !== false) { ?>
@@ -45,13 +45,13 @@
     <input name='post_id' type='hidden' value='<?= post.id ?>'>
     <input name='post_content' type='hidden' value='<?= post.content ?>'>
     <div>
-        <label for='comment_w'>Write your comment here:</label>
+        <label for='comment_w'>আপনার মতামত এখানে লিখুন:</label>
     </div>
     <div>
         <textarea
             name='comment_w'
             type='text'
-            placeholder='Enter your comment here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><? if(locals.comment_w){ ?><?= comment_w ?><? } ?></textarea>
@@ -61,11 +61,11 @@
             <?= info ?>
         </div>
     <? } ?>
-    <button class='submit' type='submit'>Submit</button>
+    <button class='submit' type='submit'>পাঠান</button>
 </form>
 <? } else { ?>
     <span class='meta_info'>
-        [ You must be signed up and be signed in to write comment ]
+        [ মতামত লিখতে আপনার নিবন্ধন থাকা লাগবে এবং নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে ]
     </span>
 <? } ?>
 
@@ -74,7 +74,7 @@
 <? } ?>
 <? } else { ?>
 <span class='content'>
-    <h6>Could not find any such post</h6>
+    <h6>লেখা খুঁজে পাওয়া যায়নি</h6>
 </span>
 <? } ?>
 

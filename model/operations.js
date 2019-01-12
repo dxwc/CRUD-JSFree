@@ -131,8 +131,8 @@ function read_post(id, for_update)
             res.content = val.unescape(res.content);
             res.by      = querystr.escape(res.by);
         }
-        res.createdAt = moment(res.createdAt).fromNow();
-        res.updatedAt = moment(res.updatedAt).fromNow();
+        res.createdAt = num_date(moment(res.createdAt).fromNow());
+        res.updatedAt = num_date(moment(res.updatedAt).fromNow());
         res.id = id;
 
         return res;
@@ -596,7 +596,7 @@ function get_post_comments(post_id)
     {
         arr.forEach((res) =>
         {
-            res.createdAt = moment(res.createdAt).fromNow();
+            res.createdAt = num_date(moment(res.createdAt).fromNow());
             res.content = img(md.render(ready(res.content)));
             res.commenter = ready(res.commenter);
         });

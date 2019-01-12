@@ -9,10 +9,10 @@ function a_comment(id, content, commenter, post_id, created_at, name)
     <a href='/user/${commenter}'>${commenter}</a> ${created_at}
     <a
         class='comment_action'
-        href='/post/${post_id}#${id}'>link</a>
+        href='/post/${post_id}#${id}'>লিংক</a>
     ${name === commenter ?
-        `<a class='comment_action' href='/delete_comment/${id}'>delete</a>` : ``}
-    ${name ? `<a class='comment_action' href='/reply_to/${id}'>reply</a>` : ``}
+        `<a class='comment_action' href='/delete_comment/${id}'>মুছে ফেলা</a>` : ``}
+    ${name ? `<a class='comment_action' href='/reply_to/${id}'>⤷জবাব/মতামত</a>` : ``}
     </span>
 <li>
 </ul>`
@@ -20,7 +20,7 @@ function a_comment(id, content, commenter, post_id, created_at, name)
 `<ul id='${id}' class='comment'>
 <li>
     <i class='meta_info'>
-        [ Comment deleted. It is possible this was a reply to another comment. ]
+        [ লেখক এই মতামতটি মুছে ফেলেছেন ]
     </i>
 <li>
 </ul>`
