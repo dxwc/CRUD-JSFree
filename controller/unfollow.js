@@ -22,7 +22,7 @@ router.post('/unfollow/:user_name', (req, res) =>
         req,
         res,
         'error',
-        { info : `You must be signed in to follow other user`},
+        { info : `আপনাকে আগে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`},
         false,
         400
     );
@@ -40,7 +40,9 @@ router.post('/unfollow/:user_name', (req, res) =>
             req,
             res,
             'error',
-            { info : 'Error trying to unfollow'},
+            { info : `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+            `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+            `পরিচালকদের জানাতে পারেন।` },
             false,
             500
         );

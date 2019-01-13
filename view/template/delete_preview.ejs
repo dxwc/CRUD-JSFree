@@ -1,13 +1,13 @@
-<?- include('./common/layout_pre.ejs', { title : 'Delete', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'মুছে ফেলা', name : locals.name }) ?>
 <span class='content'>
 <? info ?>
 <form method='POST' action='/confirm_delete/<?= id ?>'>
     <input name='post_id' type='hidden' value='<?= post_id ?>'>
-    <button type='submit' class='submit warn'>Confirm and delete comment</button>
+    <button type='submit' class='submit warn'>নিশ্চিত করুন যে আপনি মোটামোটি মুছতে চাচ্ছেন</button>
 </form>
-<p class='meta_info'>The comment :</p>
+<p class='meta_info'>মোটামোটি :</p>
 <p><?- content ?></p>
 <br>
-<a href='/post/<?= post_id ?>#<?= id ?>'>Go back</a>
+<a href='/post/<?= post_id ?>#<?= id ?>'>ফিরে যান</a>
 </span>
 <?- include('./common/layout_post.ejs') ?>

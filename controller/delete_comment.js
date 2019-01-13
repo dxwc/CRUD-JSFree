@@ -8,20 +8,20 @@ router.get('/delete_comment/:id', (req, res) =>
     let obj = {};
     if(!req.isAuthenticated())
     {
-        obj.info = `You must be signed in reply to delete your comment`;
+        obj.info = `মুছে ফেলতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে এবং মতামতের লেখক হতে হবে`;
         return render(req, res, 'error', obj, false, 400);
     }
 
     if(!val.isUUID(req.params.id, 4))
     {
-        obj.info = `No such comment exist that you can reply to`;
+        obj.info = `মোটামোটি খুঁজে পাওয়া যায়নি`;
         return render(req, res, 'error', obj, false, 500);
     }
 
     op.read_comment(req.params.id)
     .then((result) =>
     {
-        result.info = `Confirm you want to delete the comment: `;
+        result.info = `নিশ্চিত করুন যে আপনি মোটামোটি মুছতে চাচ্ছেন`;
         if(result.commenter === req.session.passport.user.id)
             return render(req, res, 'delete_preview', result);
         else
@@ -30,13 +30,15 @@ router.get('/delete_comment/:id', (req, res) =>
                 req,
                 res,
                 'delete_preview',
-                {...result, info: `not your comment, can't delete` }
+                {...result, info: `এটি আপনার লেখা মতামত নয়, আপনি মুছতে পারবেন না` }
             );
     })
     .catch((err) =>
     {
         console.error(err);
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+        `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+        `পরিচালকদের জানাতে পারেন।`;
         return render(req, res, 'delete', null, false, 500);
     })
 });
@@ -55,12 +57,14 @@ router.post('/confirm_delete/:id', (req, res) =>
             res,
             'error',
             { info :
-                `Ignore the error warning. The comment was successfully deleted `}
+                `কোথাও গরমিল হয়েছে, কিন্তু আপনার মতামত মোছার পরে হয়েছে। `}
         );
     })
     .catch((err) =>
     {
-        return render(req, res, 'error', { info : `delete failed`}, false, 500);
+        return render(req, res, 'error', { info : `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+        `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+        `পরিচালকদের জানাতে পারেন।` }, false, 500);
     });
 });
 

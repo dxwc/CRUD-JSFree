@@ -7,7 +7,7 @@ router.post('/follow/:user_name', (req, res) =>
     if(!req.isAuthenticated())
     {
         let obj = {};
-        obj.info = `You must be logged in to follow other user`;
+        obj.info = `আপনাকে আগে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'error', obj, false, 400);
     }
 
@@ -24,7 +24,9 @@ router.post('/follow/:user_name', (req, res) =>
             req,
             res,
             'error',
-            { info : 'Unexpected error trying to follow'},
+            { info : `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+            `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+            `পরিচালকদের জানাতে পারেন।` },
             false,
             500
         );
