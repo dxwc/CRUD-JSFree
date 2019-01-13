@@ -1,36 +1,37 @@
-<?- include('./common/layout_pre.ejs', { title : 'Contact', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'যোগাযোগ', name : locals.name }) ?>
 <? if(locals.name === false) { ?>
 <span class='content'>
-    You must be signed in to contact or make a report here.
-    Alternatively you can email administrator at todo@example.com
+    এখানে পাঠাতে নিবন্ধনধারী হতে হবে। তাছাড়া আপনি আমাদের সাথে ইমেইল দ্বারা যোগাযোগ
+    করতে পারেন এখানে todo@example.com
 </span>
 <? } else { ?>
 <form method='POST' action='/contact'>
     <div>
-        <label for='content'>Write your concern here:</label>
+        <label for='content'>যোগাযোগ বা সমস্যা ক্ষেত্রে যা লিখতে চান এখানে লিখুন:</label>
     </div>
     <div>
         <textarea
             style='height: 30vw'
             name='content'
             type='text'
-            placeholder='Enter your content here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><?= locals.content ? content : '' ?></textarea>
     </div>
     <? if(locals.info) { ?>
-    <div>
+    <div class='meta_info warn_text'>
         <?= info ?>
     </div>
     <? } ?>
     <div>
-        <button class='submit' type='submit'>Send</button>
+        <button class='submit' type='submit'>পাঠান</button>
     </div>
 </form>
 
 <span class='meta_info' style='margin-top: 20px'>
-    If your contact requires a response, use email: todo@example.com
+    আপনার মোটমোট বা সমস্যা সম্পর্কিত উত্তর যদি দরকার হয়, অনুগ্রহ করে ইমেইল দ্বারা যোগাযোগ করুন
+    এখানে todo@example.com
 </span>
 <? } ?>
 <?- include('./common/layout_post.ejs') ?>

@@ -18,7 +18,7 @@ router.get('/contact/:link', (req, res) =>
             res,
             'contact',
             {
-                content : `\n\n\nConcerning: `
+                content : `\n\n\nএই লেখা সম্পর্কে: `
                           + qr.unescape(req.params.link.trim())
                           + '\n'
             }
@@ -32,12 +32,12 @@ router.post('/contact', (req, res) =>
 {
     if(!req.isAuthenticated())
     {
-        req.body.info = `You must be signed in to send report here`;
+        req.body.info = `পাঠাতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'contact', req.body, false, 400);
     }
     else if(!req.body.content.trim().length)
     {
-        req.body.info = `Invalid input, retry`;
+        req.body.info = `সবকিছু ঠিক ভাবে পূরণ করে আবার চেষ্টা করুন`;
         return render(req, res, 'contact', req.body, false, 400);
     }
     else
@@ -50,7 +50,7 @@ router.post('/contact', (req, res) =>
         .catch((err) =>
         {
             console.error(err);
-            req.body.info = `Unexpected error, retry, or use email to contact`;
+            req.body.info = `কোনো সমস্যা হয়েছে, আবার চেষ্টা করুন অথবা পরিচালকদের সাথে যোগাযোগ করুন`;
             return render(req, res, 'contact', req.body, false, 500);
         });
     }
