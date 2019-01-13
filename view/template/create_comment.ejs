@@ -1,33 +1,32 @@
-<?- include('./common/layout_pre.ejs', { title : 'Comment', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'মতামত', name : locals.name }) ?>
 <span class='content'>
 <? if(locals.post_id && locals.post_content) { ?>
 <form method='POST' action='/comment'>
     <input name='post_id' type='hidden' value='<?= post_id ?>'>
     <input name='post_content' type='hidden' value='<?= post_content ?>'>
     <div>
-        <label for='comment_w'>Write your comment here:</label>
+        <label for='comment_w'>আপনার মতামত লিখুন:</label>
     </div>
     <div>
         <textarea
             name='comment_w'
             type='text'
-            placeholder='Enter your comment here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><? if(locals.comment_w){ ?><?= comment_w ?><? } ?></textarea>
     </div>
     <? if(locals.info) { ?>
-        <div>
+        <div class='meta_info warn_text'>
             <?= info ?>
         </div>
     <? } ?>
-    <button type='submit'>Submit</button>
+    <button class='submit' type='submit'>পাঠান</button>
 </form>
+<div><a href='/post/<?= post_id ?>'>মতামত লিংক</a></div>
 <p><?- post_content ?></p>
-<a href='/post/<?= post_id ?>'>post link</a>
 <? } else { ?>
-    Encountered an unexpected error. Try going back and retrying. If problem
-    persists, contact admin.
+    জবাব/মতামত পাঠাতে আপনার নিবন্ধন থাকা লাগবে এবং নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে
 <? } ?>
 </span>
 <?- include('./common/layout_post.ejs') ?>

@@ -7,7 +7,7 @@ router.post('/comment', (req, res) =>
 {
     if(!req.isAuthenticated())
     {
-        req.body.info = `You must be signed in to comment`;
+        req.body.info = `মতামত লিখতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'create_comment', req.body, false, 400);
     }
 
@@ -19,7 +19,7 @@ router.post('/comment', (req, res) =>
         !req.body.comment_w.trim().length
     )
     {
-        req.body.info = `Invalid or empty input`;
+        req.body.info = `সবকিছু ঠিক ভাবে পূরণ করে পাঠানো হয়নি, আবার চেষ্টা করুন`;
         return render(req, res, 'create_comment', req.body, false, 400);
     }
 
@@ -36,7 +36,8 @@ router.post('/comment', (req, res) =>
     .catch((err) =>
     {
         console.log(err);
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `কোনো সমস্যা হয়েছে, আবার চেষ্টা করুন অথবা ` +
+        `পরিচালকদের সাথে যোগাযোগ করুন`;
         return render(req, res, 'create_comment', req.body, false, 500);
     });
 });
@@ -46,13 +47,13 @@ router.get('/reply_to/:id', (req, res) =>
     let obj = {};
     if(!req.isAuthenticated())
     {
-        obj.info = `You must be signed in reply to a comment`;
+        obj.info = `জবাব/মতামত লিখতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'reply_to', obj, false, 400);
     }
 
     if(!val.isUUID(req.params.id, 4))
     {
-        obj.info = `No such comment exist that you can reply to`;
+        obj.info = `যে মতামতে জবাব লিখতে চাচ্ছেন সেটা খুঁজে পাওয়া যায়নি`;
         return render(req, res, 'reply_to', obj, false, 400);
     }
 
@@ -64,7 +65,8 @@ router.get('/reply_to/:id', (req, res) =>
     .catch((err) =>
     {
         console.error(err);
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `কোনো সমস্যা হয়েছে, ফিরে যেয়ে আবার চেষ্টা করুন অথবা পরিচালকদের `
+        + `সাথে যোগাযোগ করুন`;
         return render(req, res, 'reply_to', null, false, 500);
     })
 });
@@ -73,7 +75,7 @@ router.post('/reply_to/:id', (req, res) =>
 {
     if(!req.isAuthenticated())
     {
-        req.body.info = `You must be signed in reply to a comment`;
+        req.body.info = `জবাব/মতামত লিখতে নিবন্ধনধারী হিসেবে প্রবেশ করতে হবে`;
         return render(req, res, 'reply_to', req.body, false, 400);
     }
 
@@ -84,7 +86,7 @@ router.post('/reply_to/:id', (req, res) =>
         !req.body.comment_w.trim().length
     )
     {
-        req.body.info = `Invalid or empty input`;
+        req.body.info = `সবকিছু ঠিক ভাবে পূরণ করে পাঠানো হয়নি, ফিরে যেয়ে আবার চেষ্টা করুন`;
         return render(req, res, 'reply_to', req.body, false, 400);
     }
 
@@ -113,7 +115,8 @@ router.post('/reply_to/:id', (req, res) =>
     .catch((err) =>
     {
         console.log(err);
-        req.body.info = `Unexpected error, retry or contact admin`;
+        req.body.info = `কোনো সমস্যা হয়েছে, ফিরে যেয়ে আবার চেষ্টা করুন অথবা পরিচালকদের `
+        + `সাথে যোগাযোগ করুন`;
         return render(req, res, 'reply_to', req.body, false, 500);
     });
 });

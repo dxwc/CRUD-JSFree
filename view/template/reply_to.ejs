@@ -1,30 +1,28 @@
-<?- include('./common/layout_pre.ejs', { title : 'Comment', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'জবাব/মতামত', name : locals.name }) ?>
 <? if(locals.id && locals.post_id && locals.content) { ?>
 <span class='content'>
     <p><?- content ?></p>
-    <a href='/post/<?= post_id ?>#<?= id ?>'>comment link</a>
+    <a href='/post/<?= post_id ?>#<?= id ?>'>মতামত লিংক</a>
 </span>
-<? } else { ?>
-    If you are signed in and this message appears, reload, retry or contact admin.
 <? } ?>
 <form method='POST' action='/reply_to/<?= locals.id ?>'>
     <div>
-        <label for='comment_w'>Write your reply to above comment here:</label>
+        <label for='comment_w'>আপনার জবাব বা মতামত লিখুন:</label>
     </div>
     <div>
         <textarea
             name='comment_w'
             type='text'
-            placeholder='Enter your comment here'
+            placeholder='...'
             minlength='1'
             autocomplete='off'
             required><? if(locals.comment_w){ ?><?= comment_w ?><? } ?></textarea>
     </div>
     <? if(locals.info) { ?>
-        <div>
+        <div class='meta_info warn_text'>
             <?= info ?>
         </div>
     <? } ?>
-    <button class='submit' type='submit'>Submit</button>
+    <button class='submit' type='submit'>পাঠান</button>
 </form>
 <?- include('./common/layout_post.ejs') ?>

@@ -1,4 +1,4 @@
-<?- include('./common/layout_pre.ejs', { title : 'Post', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'লেখা', name : locals.name }) ?>
 
 <? if(locals.name !== false) { ?>
 <form method='POST' action='/post/'>
@@ -16,7 +16,7 @@
             required><? if(locals.content){ ?><?= content ?><? } ?></textarea>
     </div>
     <? if(locals.info) { ?>
-    <div>
+    <div class='meta_info warn_text'>
         <?= info ?>
     </div>
     <? } ?>
