@@ -199,7 +199,7 @@ function get_posts(user_name)
             {
                 res.content = ready(res.content);
             }
-            res.createdAt = moment(res.createdAt).fromNow();
+            res.createdAt = num_date(moment(res.createdAt).fromNow());
         });
 
         return arr;
@@ -241,7 +241,7 @@ function get_comments(user_name)
             {
                 res.content = ready(res.content);
             }
-            res.createdAt = moment(res.createdAt).fromNow();
+            res.createdAt = num_date(moment(res.createdAt).fromNow());
         });
 
         return arr;

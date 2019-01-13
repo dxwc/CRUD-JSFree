@@ -1,4 +1,4 @@
-<?- include('./common/layout_pre.ejs', { title : 'User', name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : 'নিবন্ধনধারী', name : locals.name }) ?>
 <span class='profile'>
 <? if(locals.user_name) { ?>
 <h1><?= locals.user_name ?></h1>
@@ -11,7 +11,7 @@
 <? } ?>
 <? if(locals.following && following.constructor === Array && following.length) { ?>
 <br>
-    <h5>You are following these users <i class='meta_info'>(only visible to you)</i></h5>
+    <h5>আপনি এই নিবন্ধনধারীদের মনে রেখেছেন <i class='meta_info'>(শুধু আপনিই এটা দেখতে পাচ্ছেন)</i></h5>
 <br>
 <table>
 <? following.forEach((user) => { ?>
@@ -24,7 +24,7 @@
                 class='unfollow'
                 method='POST'
                 action='/unfollow_confirm/<?= user.name ?>'>
-                <button class='submit warn'>Unfollow</button>
+                <button class='submit warn'>মুছে ফেলুন</button>
             </form>
         </td>
     </tr>
@@ -33,7 +33,7 @@
 <? } ?>
 <? if(locals.posts && posts.constructor === Array && posts.length) { ?>
 <br>
-<h3>Posts: </h3>
+<h3>আপনার লেখা: </h3>
 <br>
 <table>
 <? posts.forEach((p) => { ?>
@@ -56,7 +56,7 @@
 <? } ?>
 <? if(locals.comments && comments.constructor === Array && comments.length) { ?>
 <br>
-<h3>Comments: </h3>
+<h3>আপনার মতামত: </h3>
 <br>
 <table>
 <? comments.forEach((c) => { ?>
@@ -79,7 +79,7 @@
 <? } ?>
 <? } else { ?>
 <span class='content'>
-    No such user found. If you think this is an error, please retry or contact admin.
+    <h6>ওই নামে কোনো নিবন্ধনধারীকে পাওয়া যায়নি</h6>
 </span>
 <? } ?>
 </span>
