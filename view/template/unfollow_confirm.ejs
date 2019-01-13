@@ -1,15 +1,16 @@
-<?- include('./common/layout_pre.ejs', { title : `Unfollow`, name : locals.name }) ?>
+<?- include('./common/layout_pre.ejs', { title : `নাম মুছুন`, name : locals.name }) ?>
 <span class='content'>
 <? if(locals.name && locals.unfollow) { ?>
-Confirm you wish to unfollow user : <?= unfollow ?>
+নিশ্চিত করুন আপনি নামটি আর মনে রাখতে চান না : <?= unfollow ?>
 <form method='POST' action='/unfollow/<?= unfollow ?>'>
-    <button class='submit warn' type='submit'>Unfollow</button>
+    <button class='submit warn' type='submit'>মুছে ফেলুন</button>
 </form>
 <? } else if(!locals.name) { ?>
-    You must be signed in to unfollow a user you currently follow
+    আগে নিবন্ধনধারী হিসেবে প্রবেশ করতে
 <? } else { ?>
-    There was an error, go back, reload and retry. If that doesn't fix it, contact
-    admin.
+    `দুঃখিত, কোথাও গরমিল হয়েছে। ` +
+    `আবার চেষ্টা করে দেখতে পারেন অথবা নিচে যোগাযোগ লিংক এ চাপ দিয়ে ` +
+    `পরিচালকদের জানাতে পারেন।`;
 <? } ?>
 </span>
 <?- include('./common/layout_post.ejs') ?>
