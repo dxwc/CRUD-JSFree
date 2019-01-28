@@ -257,3 +257,8 @@ h6 { font-size: 1.2em; }
 {
     font-size: 2.5rem;
 }
+
+.comments .meta_info
+{
+    font-size: 0.8em;
+}
