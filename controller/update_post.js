@@ -35,7 +35,7 @@ router.get('/post/:id/update', async (req, res) =>
 
     try
     {
-        req.query.username = qr.escape(req.query.username);
+        req.query.username = qr.unescape(req.query.username);
         let post = await op.read_post(req.params.id, true)
         return render(req, res, 'update_post', post);
     }
