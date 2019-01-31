@@ -56,7 +56,7 @@ https://superuser.com/questions/1194523/lets-encrypt-certbot-where-is-the-privat
 If using express directly (TODO: nginx):
 
 `npm install pm2 -g`
-`fullchain=/etc/letsencrypt/live/masvat.com/fullchain.pem privkey=/etc/letsencrypt/live/masvat.com/privkey.pem PORT=80 user_name=thedude password=haiworld pm2 start index.js`
+`fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld pm2 start index.js`
 
 https://pm2.io/doc/en/runtime/features/commands-cheatsheet/
 

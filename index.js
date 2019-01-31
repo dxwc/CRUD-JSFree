@@ -4,6 +4,7 @@ const passport = require('./controller/middleware/auth.js');
 const session  = require('express-session');
 const helmet   = require('helmet');
 const https    = require('https');
+const fs       = require('fs');
 
 const https_options =
 {
