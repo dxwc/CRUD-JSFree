@@ -2,7 +2,6 @@ const model  = require('./index.js');
 const val    = require('validator');
 const bcrypt = require('bcrypt');
 let xss      = require('xss-filters');
-let querystr = require('querystring');
 let moment   = require('moment');
 let md       = require('markdown-it')({ breaks: true, linkify : true });
 let img      = require('../controller/function/img.js');
@@ -129,7 +128,6 @@ function read_post(id, for_update)
         else
         {
             res.content = val.unescape(res.content);
-            res.by      = querystr.escape(res.by);
         }
         res.createdAt = num_date(moment(res.createdAt).fromNow());
         res.updatedAt = num_date(moment(res.updatedAt).fromNow());
