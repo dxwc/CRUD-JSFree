@@ -3,6 +3,13 @@ const app      = express();
 const passport = require('./controller/middleware/auth.js');
 const session  = require('express-session');
 const helmet   = require('helmet');
+const https    = require('https');
+
+const https_options =
+{
+    cert: fs.readFileSync(process.env.fullchain),
+    key: fs.readFileSync(process.env.privkey)
+};
 
 app.use(helmet());
 app.use
@@ -60,6 +67,7 @@ require('./model/').connect()
     {
         http_server.on('listening', () =>
         {
+            https.createServer(http_options, app).listen(443);
             console.info
             (
                 '- HTTP server started,',

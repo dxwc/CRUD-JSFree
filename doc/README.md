@@ -1,9 +1,82 @@
+sudo apt-get install postgresql
+
+Follow: https://github.com/creationix/nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+source ~/.bashrc
+
+`nvm ls-remote` to view, install the latest LTS, example:
+`nvm install 10.15.1`
+`nvm alias default 10.15.1`
+`nvm use 10.15.1`
+
+`git clone https://github.com/dxwc/running_CRUD-JSFree_bn`
+
+bcrypt needs python and other build essential if binary is not available
+`sudo apt-get install python`
+`sudo apt-get install build-essential`
+
+`npm install`
+
+
+
+
+stop the serve if up
+
+https://www.digitalocean.com/docs/networking/dns/quickstart/
+
+https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars
+
+Create a A record, "@" (for digital ocean means root)
+create A record subdomain www also
+
+
+
+
+
+see https://certbot.eff.org/lets-encrypt/ubuntubionic-other
+
+sudo certbot certonly --standalone -d masvat.com -d www.masvat.com --register-unsafely-without-email
+
+/etc/letsencrypt has important info that should be backed up (?)
+
+`certbot certificates` shows information about certificates and where it is at
+
+DONT'T FOLLOW THIS GUY, but helpful: https://medium.com/@yash.kulshrestha/using-lets-encrypt-with-express-e069c7abe625
+
+https://superuser.com/questions/1194523/lets-encrypt-certbot-where-is-the-private-key
+
+
+
+
+
+
+
+
+
+If using express directly (TODO: nginx):
+
+`npm install pm2 -g`
+`fullchain=/etc/letsencrypt/live/masvat.com/fullchain.pem privkey=/etc/letsencrypt/live/masvat.com/privkey.pem PORT=80 user_name=thedude password=haiworld pm2 start index.js`
+
+https://pm2.io/doc/en/runtime/features/commands-cheatsheet/
+
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
+sudo ufw status
+sudo ufw status verbose
+
 May need to run `systemctl start postgresql` or similar command to start postgresql service
 
 Run once:
 
-+ `sudo -u postgres createuser -P -s -e site_admin` and set account password: `site_pass`
-+ `sudo -u postgres createdb site --owner site_admin`
++ `sudo -i -u postgres createuser -P -s -e site_admin` and set account password: `site_nice_aint_it`
++ `sudo -i -u postgres createdb site --owner site_admin`
++ `export DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site"`
 
 One way to browse and manipulate data :
 
