@@ -27,6 +27,14 @@ app.use
     })
 );
 
+app.use((req, res, next) =>
+{
+    if(!req.secure)
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    else
+        next();
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use

@@ -56,7 +56,7 @@ https://superuser.com/questions/1194523/lets-encrypt-certbot-where-is-the-privat
 If using express directly (TODO: nginx):
 
 `npm install pm2 -g`
-`fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld pm2 start index.js`
+`DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site" fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld pm2 start index.js`
 
 https://pm2.io/doc/en/runtime/features/commands-cheatsheet/
 
@@ -76,7 +76,6 @@ Run once:
 
 + `sudo -i -u postgres createuser -P -s -e site_admin` and set account password: `site_nice_aint_it`
 + `sudo -i -u postgres createdb site --owner site_admin`
-+ `export DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site"`
 
 One way to browse and manipulate data :
 
