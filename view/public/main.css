@@ -87,6 +87,12 @@ nav a, footer a, input[type='image']
 nav button, footer button
 {
     cursor: pointer;
+    border: 1px dotted grey;
+}
+
+footer button
+{
+    color: rgb(85, 85, 85);
 }
 
 .right
