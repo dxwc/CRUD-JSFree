@@ -4,7 +4,6 @@ let model    = require('../../model/');
 let bcrypt   = require('bcrypt');
 let xss      = require('xss-filters');
 let val      = require('validator');
-let querystr = require('querystring');
 
 passport.use
 (
@@ -31,7 +30,6 @@ passport.use
                 else
                 {
                     res.uname = xss.inHTMLData(val.unescape(res.uname));
-                    res.uname = querystr.escape(res.uname);
 
                     bcrypt.compare(pass_given, res.upass)
                     .then((is_maching) =>

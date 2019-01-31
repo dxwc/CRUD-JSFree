@@ -6,7 +6,8 @@ const helmet   = require('helmet');
 const https    = require('https');
 const fs       = require('fs');
 
-const https_options =
+let https_options;
+if(process.env.fullchain && process.env.privkey) https_options =
 {
     cert: fs.readFileSync(process.env.fullchain),
     key: fs.readFileSync(process.env.privkey)
@@ -27,7 +28,7 @@ app.use
     })
 );
 
-app.use((req, res, next) =>
+if(process.env.fullchain && process.env.privkey) app.use((req, res, next) =>
 {
     if(!req.secure)
         return res.redirect(['https://', req.get('Host'), req.url].join(''));
@@ -76,7 +77,8 @@ require('./model/').connect()
     {
         http_server.on('listening', () =>
         {
-            https.createServer(https_options, app).listen(443);
+            if(process.env.fullchain && process.env.privkey)
+                https.createServer(https_options, app).listen(443);
             console.info
             (
                 '- HTTP server started,',

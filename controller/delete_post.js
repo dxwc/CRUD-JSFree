@@ -2,6 +2,8 @@ let router = require('express').Router();
 let render = require('./function/render.js');
 let op     = require('../model/operations.js');
 let val    = require('validator');
+let qr     = require('querystring');
+
 
 router.get('/post/:id/delete', async (req, res) =>
 {
@@ -32,7 +34,7 @@ router.get('/post/:id/delete', async (req, res) =>
 
     try
     {
-        let post = await op.read_post(req.params.id, true)
+        let post = await op.read_post(req.params.id, true);
         return render(req, res, 'delete_post', post);
     }
     catch(err)
