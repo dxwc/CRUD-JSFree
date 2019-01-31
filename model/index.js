@@ -16,7 +16,7 @@ new Sequelize
 (
     'site',
     'site_admin',
-    'site_pass',
+    'site_nice_aint_it',
     {
         host : 'localhost',
         dialect : 'postgres',
