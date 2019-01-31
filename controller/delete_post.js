@@ -34,6 +34,7 @@ router.get('/post/:id/delete', async (req, res) =>
 
     try
     {
+        req.query.username = qr.escape(req.query.username);
         let post = await op.read_post(req.params.id, true);
         return render(req, res, 'delete_post', post);
     }
