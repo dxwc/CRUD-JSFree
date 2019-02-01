@@ -16,6 +16,7 @@ router.use(require('./unfollow.js'));
 router.use(require('./admin.js'));
 router.use(require('./create_comment.js'));
 router.use(require('./delete_comment.js'));
+router.use(require('./news'));
 router.get('/about', (req, res) => render(req, res, 'about'));
 router.get('/terms', (req, res) => render(req, res, 'terms'));
 router.get('/privacy', (req, res) => render(req, res, 'privacy'));

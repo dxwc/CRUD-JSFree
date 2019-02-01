@@ -10,16 +10,12 @@ let urls =
         to_search : `Channel i NEWS ||`
     },
     {
-        channel_id : `UCA4y9g_GRdNrZLH_u5LLSdw`,
-        to_search : `Bangla News`
+        channel_id : `UC2P5Fd5g41Gtdqf0Uzh8Qaw`,
+        to_search : `Rtv News`
     },
     {
         channel_id : `UChPD2BQ2dJ-w00klQQkc-Qg`,
         to_search : `পর্ব`
-    },
-    {
-        channel_id : `UC2P5Fd5g41Gtdqf0Uzh8Qaw`,
-        to_search : `Rtv News`
     }
 ];
 

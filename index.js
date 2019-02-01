@@ -14,6 +14,9 @@ if(process.env.fullchain && process.env.privkey) https_options =
 };
 
 app.use(helmet());
+
+// TODO
+/*
 app.use
 (
     helmet.contentSecurityPolicy
@@ -27,6 +30,7 @@ app.use
         browserSniff : false
     })
 );
+*/
 
 if(process.env.fullchain && process.env.privkey) app.use((req, res, next) =>
 {

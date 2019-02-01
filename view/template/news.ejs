@@ -1,0 +1,23 @@
+<?- include('./common/layout_pre.ejs', { title : 'সংবাদসমূহ', name : locals.name }) ?>
+<span class='content'>
+<?
+if(locals.news && locals.news.constructor === Array)
+{
+    news.forEach((v) =>
+    {
+?>
+    <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube-nocookie.com/embed/<?= v.id ?>"
+        frameborder="0"
+        allow=
+        "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    <br>
+<?
+    });
+}
+?>
+</span>
+<?- include('./common/layout_post.ejs') ?>

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "user_name=admin password=123 node index.js"
+    "start": "node news_server.js | user_name=admin password=123 node index.js"
   },
   "engines": {
     "node": "^10.15.1"
