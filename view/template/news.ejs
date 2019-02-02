@@ -6,7 +6,8 @@ if(locals.news && locals.news.constructor === Array)
     news.forEach((v) =>
     {
 ?>
-    <iframe
+    <div class='video'>
+        <iframe
         width="560"
         height="315"
         src="https://www.youtube-nocookie.com/embed/<?= v.id ?>"
@@ -14,7 +15,7 @@ if(locals.news && locals.news.constructor === Array)
         allow=
         "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
-    <br>
+    </div>
 <?
     });
 }
