@@ -58,6 +58,7 @@ async function save_file()
         };
 
         fs.writeFileSync(json_file_path, JSON.stringify(vid));
+        console.log('(: collected and saved news video feed json :)');
     }
     catch(err)
     {
