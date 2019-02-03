@@ -5,7 +5,7 @@
 <? if(locals.name && locals.user_name && locals.name !== locals.user_name) { ?>
 <br>
 <form method='POST' action='/follow/<?= user_name ?>'>
-    <button class='submit' type='submit'>Follow</button>
+    <button class='submit' type='submit'>মনে রাখুন</button>
 </form>
 <br>
 <? } ?>
@@ -17,7 +17,7 @@
 <? following.forEach((user) => { ?>
     <tr>
         <td>
-            <a href='/user/<?= user.name ?>'><?= user.name ?>
+            <b style='margin-right: 1rem;'><a href='/user/<?= user.name ?>'><?= user.name ?></a></b>
         </td>
         <td>
             <form
