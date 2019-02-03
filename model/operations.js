@@ -4,13 +4,19 @@ const bcrypt = require('bcrypt');
 let xss      = require('xss-filters');
 let moment   = require('moment');
 let md       = require('markdown-it')({ breaks: true, linkify : true });
+let md_post  = require('markdown-it')({ breaks: true, linkify : false });
 let img      = require('../controller/function/img.js');
 let num_date = require('../controller/function/num_date.js');
+let yt_embed = require('../controller/function/yt_embed.js');
 
-// md.disable('link');
+// md.disable('link'); // <url> or [name](url), and linkify is direct url pasted
 md.disable('image');
 md.disable('normalize');
 md.enable('newline');
+
+md_post.disable('image');
+md_post.disable('normalize');
+md_post.enable('newline');
 
 function ready(input)
 {
@@ -123,7 +129,7 @@ function read_post(id, for_update)
         res.by = ready(res.by);
         if(!for_update)
         {
-            res.content = img(md.render(ready(res.content)));
+            res.content = img(yt_embed(md_post.render(ready(res.content))));
         }
         else
         {
