@@ -14,6 +14,10 @@ let urls =
         to_search : `Rtv News`
     },
     {
+        channel_id : `UCNUFterLJ9vpFZZ0try7sLA`,
+        to_search : `Somoy tv bulletin`
+    },
+    {
         channel_id : `UChPD2BQ2dJ-w00klQQkc-Qg`,
         to_search : `পর্ব`
     }
