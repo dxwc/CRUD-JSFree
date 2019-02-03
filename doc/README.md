@@ -47,6 +47,27 @@ https://superuser.com/questions/1194523/lets-encrypt-certbot-where-is-the-privat
 
 
 
+see `less /var/log/auth.log` for all the automated hacking attempts, I saw mostly
+ssh attempt. Change ssh port
+
+`vim /etc/ssh/sshd_config`
+
+`change/uncomment port on the file` using 9003
+change iptables rule from ufw
+
+`sudo ufw deny ssh`
+`sudo ufw allow 9003`
+
+to remove `ufw status numbered` to view number and then
+`ufw delete <number>`
+
+`ufw allow 9003/tcp` to allow ssh in 9003
+
+`service sshd restart`
+
+now on, to ssh, do `ssh <user name>:<ip> -p 9003`
+
+
 
 
 
@@ -79,7 +100,7 @@ Run once:
 
 One way to browse and manipulate data :
 
-+ `sudo psql -U site_admin -d site -W` and then enter password `site_pass`
++ `sudo psql -U site_admin -d site -h localhost -W` and then enter password `site_nice_aint_it`
 + Accepts all valid postgres SQL commands, example :
     + Count number of entry in users table: `SELECT COUNT(*) FROM users;`
     + Get max of 5 username from db: `SELECT uname FROM users LIMIT 5;`
