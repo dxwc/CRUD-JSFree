@@ -1,6 +1,6 @@
-const model  = require('./index.js');
-const val    = require('validator');
-const bcrypt = require('bcrypt');
+let model    = require('./index.js');
+let val      = require('validator');
+let bcrypt   = require('bcrypt');
 let xss      = require('xss-filters');
 let moment   = require('moment');
 let md       = require('markdown-it')({ breaks: true, linkify : true });
@@ -13,6 +13,34 @@ let yt_embed = require('../controller/function/yt_embed.js');
 md.disable('image');
 md.disable('normalize');
 md.enable('newline');
+
+// -------
+// https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md
+// Remember old renderer, if overridden, or proxy to default renderer
+let defaultRender =
+md.renderer.rules.link_open || function(tokens, idx, options, env, self)
+{
+    return self.renderToken(tokens, idx, options);
+};
+
+md.renderer.rules.link_open = function (tokens, idx, options, env, self)
+{
+    // If you are sure other plugins can't add `target` - drop check below
+    let aIndex = tokens[idx].attrIndex('target');
+
+    if(aIndex < 0)
+    {
+        tokens[idx].attrPush(['target', '_blank']); // add new attribute
+    }
+    else
+    {
+        tokens[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
+    }
+
+    // pass token to default renderer.
+    return defaultRender(tokens, idx, options, env, self);
+};
+// -------
 
 md_post.disable('image');
 md_post.disable('normalize');
