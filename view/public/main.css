@@ -272,9 +272,21 @@ h6 { font-size: 1.2em; }
 .video
 {
     position: relative;
+    display: block;
     width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 72vh;
+    max-width: 128vh;
+    overflow: hidden;
+    display: table;
+    margin: 0 auto;
     margin-bottom: 1%;
+    table-layout: fixed;
+}
+
+.vid_link
+{
+    display: table;
+    margin: 0 auto;
 }
 
 .video iframe
