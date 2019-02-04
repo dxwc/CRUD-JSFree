@@ -4,7 +4,7 @@ let bcrypt   = require('bcrypt');
 let xss      = require('xss-filters');
 let moment   = require('moment');
 let md       = require('markdown-it')({ breaks: true, linkify : true });
-let md_post  = require('markdown-it')({ breaks: true, linkify : false });
+let md_post  = require('markdown-it')({ breaks: true, linkify : true });
 let img      = require('../controller/function/img.js');
 let num_date = require('../controller/function/num_date.js');
 let yt_embed = require('../controller/function/yt_embed.js');
@@ -14,37 +14,125 @@ md.disable('image');
 md.disable('normalize');
 md.enable('newline');
 
-// -------
-// https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md
-// Remember old renderer, if overridden, or proxy to default renderer
-let defaultRender =
-md.renderer.rules.link_open || function(tokens, idx, options, env, self)
+md_post.disable('image');
+md_post.disable('normalize');
+md_post.enable('newline');
+
+const format_1 = new RegExp
+(
+    `(?:^|\\s+)https:\\/\\/(?:www|m)\\.youtube\\.com\\/watch\\?` +
+    `(?:.+\\&|)v=([a-zA-Z0-9_\\-]{11})(?:(\\&.*)|(?:(\\s+|$)))`
+);
+
+const format_2 = new RegExp
+(
+    `(?:^|\\s+)https:\\/\\/youtu.be\\/([a-zA-Z0-9_\\-]{11})(?:(\\?.*)|(?:(\\s+|$)))`
+);
+
+const format_3 = new RegExp
+(
+    `(?:^|\\s+)https:\\/\\/www\\.(?:youtube|youtube\\-nocookie)*\\.com\\/embed\\/` +
+    `([a-zA-Z0-9_\\-]{11})(?:(\\?.*)|(?:(\\s+|$)))`
+);
+
+function replacer(matched, id)
+{
+    return `<div class='video'><iframe
+width="560"
+height="315"
+src="https://www.youtube-nocookie.com/embed/${id}?rel=0"
+frameborder="0"
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen></iframe></div><div><a target='_blank' class='meta_info' href='${matched.trim()}'>${matched.trim()}</a></div><br>`
+}
+
+let default_linkopen_renderer =
+md_post.renderer.rules.link_open || function(tokens, idx, options, env, self)
 {
     return self.renderToken(tokens, idx, options);
 };
 
-md.renderer.rules.link_open = function (tokens, idx, options, env, self)
+md_post.renderer.rules.link_open = function(tokens, idx, options, env, self)
 {
-    // If you are sure other plugins can't add `target` - drop check below
-    let aIndex = tokens[idx].attrIndex('target');
-
-    if(aIndex < 0)
+    if
+    (
+        tokens.length > idx + 1 &&
+        tokens[idx + 1].type == 'text' &&
+        tokens[idx + 1].content &&
+        (
+            format_1.test(tokens[idx + 1].content) ||
+            format_2.test(tokens[idx + 1].content) ||
+            format_3.test(tokens[idx + 1].content)
+        )
+    )
     {
-        tokens[idx].attrPush(['target', '_blank']); // add new attribute
+        return '';
     }
     else
     {
-        tokens[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
+        return default_linkopen_renderer(tokens, idx, options, env, self);
     }
+}
 
-    // pass token to default renderer.
-    return defaultRender(tokens, idx, options, env, self);
+let default_linktext_renderer =
+md_post.renderer.rules.text || function(tokens, idx, options, env, self)
+{
+    return self.renderToken(tokens, idx, options);
 };
-// -------
 
-md_post.disable('image');
-md_post.disable('normalize');
-md_post.enable('newline');
+md_post.renderer.rules.text = function(tokens, idx, options, env, self)
+{
+    if
+    (
+        tokens.length > 1 &&
+        tokens[idx - 1] &&
+        tokens[idx - 1].type === 'link_open' &&
+        tokens[idx].content
+    )
+    {
+        return tokens[idx].content
+        .replace(format_1, replacer)
+        .replace(format_2, replacer)
+        .replace(format_3, replacer);
+    }
+    else
+    {
+        return default_linktext_renderer(tokens, idx, options, env, self);
+    }
+}
+
+
+let default_linkclose_renderer =
+md_post.renderer.rules.link_close || function(tokens, idx, options, env, self)
+{
+    return self.renderToken(tokens, idx, options);
+};
+
+md_post.renderer.rules.link_close = function(tokens, idx, options, env, self)
+{
+    if
+    (
+        tokens.length > 1 &&
+        tokens[idx - 1].type == 'text' &&
+        tokens[idx - 1].content &&
+        (
+            format_1.test(tokens[idx - 1].content) ||
+            format_2.test(tokens[idx - 1].content) ||
+            format_3.test(tokens[idx - 1].content)
+        )
+    )
+    {
+        return '';
+    }
+    else
+    {
+        return default_linkclose_renderer(tokens, idx, options, env, self);
+    }
+}
+
+
+
+// console.log(md_post.render('https://www.youtube.com/watch?v=bk7McNUjWgw'));
 
 function ready(input)
 {
@@ -157,7 +245,7 @@ function read_post(id, for_update)
         res.by = ready(res.by);
         if(!for_update)
         {
-            res.content = img(yt_embed(md_post.render(ready(res.content))));
+            res.content = img(md_post.render(ready(res.content)));
         }
         else
         {
