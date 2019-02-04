@@ -23,7 +23,7 @@ height="315"
 src="https://www.youtube-nocookie.com/embed/${id}?rel=0"
 frameborder="0"
 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen></iframe></div><div><a target='_blank' class='meta_info' href='${matched.trim()}'>${matched.trim()}</a></div>`
+allowfullscreen></iframe></div><div class='vid_link'><a class='meta_info' href='${matched.trim()}'>${matched.trim()}</a></div>`
 }
 
 module.exports = (md_post) =>
