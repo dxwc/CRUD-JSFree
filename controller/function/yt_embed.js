@@ -15,28 +15,6 @@ const format_3 = new RegExp
     `([a-zA-Z0-9_\\-]{11})(?:(\\?.*)|(?:(\\s+|$)))`
 );
 
-// https://stackoverflow.com/a/8943487
-var urlRegex =
-/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-
-function linker(url)
-{
-    if
-    (
-        url.indexOf('youtube.com/watch') !== -1 ||
-        url.indexOf('youtube.com/embed') !== -1 ||
-        url.indexOf('youtube-nocookie.com') !== -1 ||
-        url.indexOf('youtu.be/') !== -1
-    )
-    {
-        return url;
-    }
-    else
-    {
-        return `<a target='_blank' href='${url}'>${url}</a>`;
-    }
-}
-
 function replacer(matched, id)
 {
     return `<div class='video'><iframe
@@ -48,13 +26,89 @@ allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 allowfullscreen></iframe></div><div><a target='_blank' class='meta_info' href='${matched.trim()}'>${matched.trim()}</a></div><br>`
 }
 
-function embed(input_text)
+module.exports = (md_post) =>
 {
-    return input_text
-    .replace(urlRegex, linker)
-    .replace(format_1, replacer)
-    .replace(format_2, replacer)
-    .replace(format_3, replacer);
-}
+    let default_linkopen_renderer =
+    md_post.renderer.rules.link_open || function(tokens, idx, options, env, self)
+    {
+        return self.renderToken(tokens, idx, options);
+    };
 
-module.exports = embed;
+    md_post.renderer.rules.link_open = function(tokens, idx, options, env, self)
+    {
+        if
+        (
+            tokens.length > idx + 1 &&
+            tokens[idx + 1].type == 'text' &&
+            tokens[idx + 1].content &&
+            (
+                format_1.test(tokens[idx + 1].content) ||
+                format_2.test(tokens[idx + 1].content) ||
+                format_3.test(tokens[idx + 1].content)
+            )
+        )
+        {
+            return '';
+        }
+        else
+        {
+            return default_linkopen_renderer(tokens, idx, options, env, self);
+        }
+    }
+
+    let default_linktext_renderer =
+    md_post.renderer.rules.text || function(tokens, idx, options, env, self)
+    {
+        return self.renderToken(tokens, idx, options);
+    };
+
+    md_post.renderer.rules.text = function(tokens, idx, options, env, self)
+    {
+        if
+        (
+            tokens.length > 1 &&
+            tokens[idx - 1] &&
+            tokens[idx - 1].type === 'link_open' &&
+            tokens[idx].content
+        )
+        {
+            return tokens[idx].content
+            .replace(format_1, replacer)
+            .replace(format_2, replacer)
+            .replace(format_3, replacer);
+        }
+        else
+        {
+            return default_linktext_renderer(tokens, idx, options, env, self);
+        }
+    }
+
+
+    let default_linkclose_renderer =
+    md_post.renderer.rules.link_close || function(tokens, idx, options, env, self)
+    {
+        return self.renderToken(tokens, idx, options);
+    };
+
+    md_post.renderer.rules.link_close = function(tokens, idx, options, env, self)
+    {
+        if
+        (
+            tokens.length > 1 &&
+            tokens[idx - 1].type == 'text' &&
+            tokens[idx - 1].content &&
+            (
+                format_1.test(tokens[idx - 1].content) ||
+                format_2.test(tokens[idx - 1].content) ||
+                format_3.test(tokens[idx - 1].content)
+            )
+        )
+        {
+            return '';
+        }
+        else
+        {
+            return default_linkclose_renderer(tokens, idx, options, env, self);
+        }
+    }
+}
