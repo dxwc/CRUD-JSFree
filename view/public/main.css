@@ -169,7 +169,12 @@ footer
     margin-bottom: 2%;
     display: table;
     margin: 0 auto;
-    max-width: 30%;
+    max-width: 90%;
+}
+
+.main_form input
+{
+    width: 100%;
 }
 
 .main_form button, .submit
