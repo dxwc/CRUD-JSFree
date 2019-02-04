@@ -27,6 +27,9 @@ router.get('/post/:id', async (req, res) =>
     catch(err)
     {
         console.error(err);
+        obj.info = `দুঃখিত। ওয়েবসাইটের কোথাও সমস্যা দেখা ` +
+        `দিয়েছে। যদি সবকিছু ঠিকঠাক না দেখা যায়, অনুগ্রহ করে যোগযোগ করে কোথায় সমস্যা হচ্ছে ` +
+        `জানান যাতে এটা দ্রুত ঠিক করতে পারি।`;
         return render(req, res, 'read_post', obj, false, 500);
     }
 });
