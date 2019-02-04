@@ -39,6 +39,7 @@ module.exports = (md_post) =>
         if
         (
             tokens.length > idx + 1 &&
+            tokens[idx + 1] &&
             tokens[idx + 1].type == 'text' &&
             tokens[idx + 1].content &&
             (
@@ -95,6 +96,7 @@ module.exports = (md_post) =>
         if
         (
             tokens.length > 1 &&
+            tokens[idx - 1] &&
             tokens[idx - 1].type == 'text' &&
             tokens[idx - 1].content &&
             (
