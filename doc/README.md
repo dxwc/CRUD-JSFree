@@ -1,21 +1,53 @@
+# TODO
+
++ move controller function img into yt_embed by creating new renderer
+
+
+
 sudo apt-get install postgresql
 
-Follow: https://github.com/creationix/nvm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-source ~/.bashrc
 
-`nvm ls-remote` to view, install the latest LTS, example:
-`nvm install 10.15.1`
-`nvm alias default 10.15.1`
-`nvm use 10.15.1`
+May need to run `systemctl start postgresql` or similar command to start postgresql service
 
-`git clone https://github.com/dxwc/running_CRUD-JSFree_bn`
+Run once:
 
-bcrypt needs python and other build essential if binary is not available
-`sudo apt-get install python`
-`sudo apt-get install build-essential`
++ `sudo -i -u postgres createuser -P -s -e site_admin` and set account password: `site_nice_aint_it`
++ `sudo -i -u postgres createdb site --owner site_admin`
 
-`npm install`
+One way to browse and manipulate data :
+
++ `sudo psql -U site_admin -d site -h localhost -W` and then enter password `site_nice_aint_it`
++ Accepts all valid postgres SQL commands, example :
+    + Count number of entry in users table: `SELECT COUNT(*) FROM users;`
+    + Get max of 5 username from db: `SELECT uname FROM users LIMIT 5;`
+    + Deletes/removes everything: `DROP OWNED BY current_user CASCADE;`
++ Additional commands example:
+    + `\d <table name>` shows description of table
+    + `\dt` or `\dt+` to list relations
+    + `\l` lists all database
+    + `\conninfo` shows connection info
+    + `\?` prints available `psql` command and help text
+    + `\q` to quit
+
+
+
++ Follow: https://github.com/creationix/nvm
++ `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+source ~/.bashrc`
++ `nvm ls-remote` to view, install the latest LTS, example:
++ `nvm install 10.15.1`
++ `nvm alias default 10.15.1`
++ `nvm use 10.15.1`
+
+
+
+Bcrypt needs python and other build essential if binary is not available
+
++ `sudo apt-get install python`
++ `sudo apt-get install build-essential`
+
++ `git clone https://github.com/dxwc/running_CRUD-JSFree_bn`
++ `npm install`
 
 
 
@@ -77,7 +109,6 @@ now on, to ssh, do `ssh <user name>:<ip> -p 9003`
 If using express directly (TODO: nginx):
 
 `npm install pm2 -g`
-`DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site" fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld SESSION_SECRET="coolcoolcoolwooo!" pm2 start index.js`
 
 https://pm2.io/doc/en/runtime/features/commands-cheatsheet/
 
@@ -87,31 +118,16 @@ sudo ufw allow ssh
 sudo ufw allow 80/tcp
 sudo ufw allow http
 sudo ufw allow https
+sudo ufw deny 25
+sudo ufw deny 143
+sudo ufw deny 993
+sudo ufw deny 110
+sudo ufw deny 995
 sudo ufw enable
 sudo ufw status
 sudo ufw status verbose
 
-May need to run `systemctl start postgresql` or similar command to start postgresql service
 
-Run once:
-
-+ `sudo -i -u postgres createuser -P -s -e site_admin` and set account password: `site_nice_aint_it`
-+ `sudo -i -u postgres createdb site --owner site_admin`
-
-One way to browse and manipulate data :
-
-+ `sudo psql -U site_admin -d site -h localhost -W` and then enter password `site_nice_aint_it`
-+ Accepts all valid postgres SQL commands, example :
-    + Count number of entry in users table: `SELECT COUNT(*) FROM users;`
-    + Get max of 5 username from db: `SELECT uname FROM users LIMIT 5;`
-    + Deletes/removes everything: `DROP OWNED BY current_user CASCADE;`
-+ Additional commands example:
-    + `\d <table name>` shows description of table
-    + `\dt` or `\dt+` to list relations
-    + `\l` lists all database
-    + `\conninfo` shows connection info
-    + `\?` prints available `psql` command and help text
-    + `\q` to quit
 
 # Sequelize sync create log dump :
 
@@ -130,3 +146,8 @@ CREATE TABLE IF NOT EXISTS "reports" ("id" UUID , "by" UUID REFERENCES "users"("
 CREATE TABLE IF NOT EXISTS "follows" ("user_id" UUID  REFERENCES "users" ("id"), "following" UUID  REFERENCES "users" ("id"), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("user_id","following"));
 
 CREATE TABLE IF NOT EXISTS "Sessions" ("sid" VARCHAR(36) , "expires" TIMESTAMPWITH TIME ZONE, "data" TEXT, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("sid"));```
+
+
+# INIT
+
+`DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site" fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld SESSION_SECRET="coolcoolcoolwooo!" pm2 start index.js`
