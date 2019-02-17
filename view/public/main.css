@@ -88,6 +88,7 @@ nav button, footer button
 {
     cursor: pointer;
     border: 1px dotted grey;
+    border-radius: 0.5vw;
 }
 
 footer button
@@ -130,6 +131,8 @@ a
     padding-right: 1em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
+    border-radius: 0.5vw;
+    border: 0.1vw solid black;
 }
 
 .meta_info, .meta_info *, label
