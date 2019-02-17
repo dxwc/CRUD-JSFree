@@ -259,7 +259,7 @@ h6 { font-size: 1.2em; }
 .read h5,
 .read h6
 {
-    text-align: left !important;
+    text-align: center !important;
 }
 
 .warn_text
