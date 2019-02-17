@@ -28,7 +28,7 @@ function a_comment(id, content, commenter, post_id, created_at, name)
 
 module.exports = (comments, name) =>
 {
-    let html = cheerio.load(`<span class='comments'></span>`, { xmlMode: true });
+    let html = cheerio.load(`<span class='comments'></span>`);
 
     for(let i = 0; i < comments.length; ++i)
     {
