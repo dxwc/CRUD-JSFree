@@ -20,6 +20,14 @@ let urls =
     {
         channel_id : `UChPD2BQ2dJ-w00klQQkc-Qg`,
         to_search : `পর্ব`
+    },
+    {
+        channel_id : `UCzMeQSfaUSSuA4MgZ2wlT1Q`,
+        to_search : `HELLO AMERICA`
+    },
+    {
+        channel_id : `UCIIkOzwZIdLfHa4Q13dQrkw`,
+        to_search : ` `
     }
 ];
 
