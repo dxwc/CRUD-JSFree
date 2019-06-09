@@ -1,4 +1,4 @@
-# TODO
+# TODO : cleanup
 
 + move controller function img into yt_embed by creating new renderer
 
@@ -67,7 +67,7 @@ create A record subdomain www also
 
 see https://certbot.eff.org/lets-encrypt/ubuntubionic-other
 
-sudo certbot certonly --standalone -d masvat.com -d www.masvat.com --register-unsafely-without-email
+sudo certbot certonly --standalone -d example.com -d www.example.com --register-unsafely-without-email
 
 /etc/letsencrypt has important info that should be backed up (?)
 
@@ -150,4 +150,4 @@ CREATE TABLE IF NOT EXISTS "Sessions" ("sid" VARCHAR(36) , "expires" TIMESTAMPWI
 
 # INIT
 
-`DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site" fullchain="/etc/letsencrypt/live/masvat.com/fullchain.pem" privkey="/etc/letsencrypt/live/masvat.com/privkey.pem" PORT=80 user_name=thedude password=haiworld SESSION_SECRET="coolcoolcoolwooo!" pm2 start index.js`
+`DATABASE_URL="postgres://site_admin:site_nice_aint_it@localhost:5432/site" fullchain="/etc/letsencrypt/live/example.com/fullchain.pem" privkey="/etc/letsencrypt/live/example.com/privkey.pem" PORT=80 user_name=thedude password=haiworld SESSION_SECRET="coolcoolcoolwooo!" pm2 start index.js`

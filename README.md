@@ -1,5 +1,3 @@
-For english version of this project, go [here](https://github.com/dxwc/CRUD-JSFree)
-
 লেখা, মতামত এবং পাল্টা মতামত বিত্রির ওয়েবসাইট।
 
 # বৈশিষ্ট্যর ভেতরে আছে:
@@ -25,6 +23,7 @@ For english version of this project, go [here](https://github.com/dxwc/CRUD-JSFr
     + Table of post and comment activity on profile
 + XSS protection, input validation, password hashing, authentication captcha, post
   submission time limit and security headers are set
++ Community youtube channel subscription page
 
 # Install
 
